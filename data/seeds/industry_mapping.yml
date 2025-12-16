@@ -1,0 +1,120 @@
+# Industry classification mapping
+# Keywords for rule-based industry tagging
+
+industries:
+  "Technology":
+    - "software"
+    - "saas"
+    - "cloud"
+    - "ai"
+    - "artificial intelligence"
+    - "machine learning"
+    - "data"
+    - "tech"
+    - "platform"
+    - "api"
+    - "developer"
+    - "infrastructure"
+
+  "Financial Services":
+    - "fintech"
+    - "banking"
+    - "finance"
+    - "investment"
+    - "trading"
+    - "payments"
+    - "credit"
+    - "lending"
+    - "wealth"
+    - "insurance"
+
+  "Healthcare":
+    - "health"
+    - "medical"
+    - "healthcare"
+    - "biotech"
+    - "pharma"
+    - "clinical"
+    - "patient"
+    - "hospital"
+    - "therapy"
+    - "diagnostics"
+
+  "E-commerce/Retail":
+    - "ecommerce"
+    - "e-commerce"
+    - "retail"
+    - "marketplace"
+    - "shopping"
+    - "consumer"
+    - "brands"
+    - "direct-to-consumer"
+    - "d2c"
+
+  "Media/Entertainment":
+    - "media"
+    - "entertainment"
+    - "gaming"
+    - "streaming"
+    - "content"
+    - "publishing"
+    - "video"
+    - "music"
+    - "creator"
+
+  "Education":
+    - "education"
+    - "edtech"
+    - "learning"
+    - "university"
+    - "school"
+    - "training"
+    - "tutoring"
+    - "curriculum"
+
+  "Real Estate":
+    - "real estate"
+    - "proptech"
+    - "property"
+    - "housing"
+    - "construction"
+    - "mortgage"
+    - "rental"
+
+  "Transportation/Logistics":
+    - "transportation"
+    - "logistics"
+    - "delivery"
+    - "shipping"
+    - "supply chain"
+    - "mobility"
+    - "freight"
+    - "fleet"
+
+  "Energy":
+    - "energy"
+    - "renewable"
+    - "solar"
+    - "climate"
+    - "sustainability"
+    - "utilities"
+    - "cleantech"
+    - "carbon"
+
+  "Professional Services":
+    - "consulting"
+    - "legal"
+    - "accounting"
+    - "advisory"
+    - "professional services"
+    - "law"
+    - "audit"
+
+  "Cybersecurity":
+    - "cybersecurity"
+    - "security"
+    - "infosec"
+    - "compliance"
+    - "privacy"
+    - "threat"
+    - "vulnerability"

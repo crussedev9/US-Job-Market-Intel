@@ -1,0 +1,8 @@
+company_name,careers_url,ats_type,is_portfolio,notes
+OpenAI,https://boards.greenhouse.io/openai,greenhouse,false,AI research company
+Anthropic,https://boards.greenhouse.io/anthropic,greenhouse,false,AI safety company
+Stripe,https://boards.greenhouse.io/stripe,greenhouse,false,Payment processing
+Netflix,https://jobs.lever.co/netflix,lever,false,Streaming service
+Airbnb,https://boards.greenhouse.io/airbnb,greenhouse,false,Home sharing platform
+Databricks,https://boards.greenhouse.io/databricks,greenhouse,false,Data analytics platform
+Snowflake,https://boards.greenhouse.io/snowflake,greenhouse,false,Cloud data warehouse

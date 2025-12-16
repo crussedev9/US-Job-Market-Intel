@@ -1,0 +1,117 @@
+# Role family taxonomy
+# Maps role families to keyword patterns for classification
+
+role_families:
+  "Tech/Engineering":
+    - "software engineer"
+    - "engineer"
+    - "developer"
+    - "architect"
+    - "sre"
+    - "devops"
+    - "backend"
+    - "frontend"
+    - "full stack"
+    - "fullstack"
+    - "infrastructure"
+    - "security engineer"
+    - "cloud engineer"
+    - "platform engineer"
+    - "systems engineer"
+
+  "Data/AI":
+    - "data scientist"
+    - "data engineer"
+    - "data analyst"
+    - "machine learning"
+    - "ml engineer"
+    - "ai engineer"
+    - "analytics"
+    - "business intelligence"
+    - "bi analyst"
+    - "research scientist"
+    - "applied scientist"
+
+  "Product/Design":
+    - "product manager"
+    - "product owner"
+    - "designer"
+    - "ux"
+    - "ui"
+    - "product designer"
+    - "design lead"
+    - "design manager"
+    - "user experience"
+    - "user research"
+
+  "Sales":
+    - "sales"
+    - "account executive"
+    - "business development"
+    - "bdr"
+    - "sdr"
+    - "sales rep"
+    - "account manager"
+    - "sales manager"
+    - "enterprise sales"
+
+  "Marketing":
+    - "marketing"
+    - "growth"
+    - "content"
+    - "social media"
+    - "brand"
+    - "demand generation"
+    - "digital marketing"
+    - "marketing manager"
+    - "product marketing"
+    - "performance marketing"
+
+  "Customer Success":
+    - "customer success"
+    - "customer support"
+    - "support engineer"
+    - "solutions engineer"
+    - "technical account manager"
+    - "implementation"
+    - "onboarding"
+
+  "Finance":
+    - "finance"
+    - "accounting"
+    - "controller"
+    - "accountant"
+    - "financial analyst"
+    - "fp&a"
+    - "treasurer"
+    - "cfo"
+
+  "HR/Talent":
+    - "recruiter"
+    - "talent"
+    - "hr"
+    - "human resources"
+    - "people ops"
+    - "people partner"
+    - "talent acquisition"
+    - "sourcer"
+
+  "Operations/Strategy":
+    - "operations"
+    - "strategy"
+    - "program manager"
+    - "project manager"
+    - "business ops"
+    - "chief of staff"
+    - "operations manager"
+    - "biz ops"
+
+  "Legal/Compliance":
+    - "legal"
+    - "counsel"
+    - "lawyer"
+    - "compliance"
+    - "paralegal"
+    - "attorney"
+    - "general counsel"
+    - "privacy"

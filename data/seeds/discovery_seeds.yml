@@ -1,0 +1,29 @@
+# Discovery seeds for automatic board detection
+# This file contains seed data for discovering new Greenhouse/Lever boards
+
+# Method 1: Domain-based discovery
+# Provide company domains to probe for careers pages
+domains:
+  - domain: "scale.com"
+    company_name: "Scale AI"
+  - domain: "notion.so"
+    company_name: "Notion"
+  - domain: "figma.com"
+    company_name: "Figma"
+  - domain: "airtable.com"
+    company_name: "Airtable"
+  - domain: "vercel.com"
+    company_name: "Vercel"
+
+# Method 2: Known careers URLs to validate
+known_careers_urls:
+  - "https://boards.greenhouse.io/ramp"
+  - "https://boards.greenhouse.io/retool"
+  - "https://jobs.lever.co/faire"
+  - "https://jobs.lever.co/gusto"
+
+# Search keywords for web-based discovery (future enhancement)
+search_keywords:
+  - "Y Combinator portfolio companies"
+  - "Sequoia Capital portfolio"
+  - "Andreessen Horowitz portfolio"
