@@ -338,41 +338,107 @@ def full_run(
 
     # 2. Ingestion
     console.print("\n[bold cyan]Step 2: Ingestion[/bold cyan]")
-    from typer.testing import CliRunner
 
-    runner = CliRunner()
-    runner.invoke(
-        ingest,
-        [
-            "--run-date",
-            run_date_obj.isoformat(),
-            "--max-companies",
-            str(max_companies) if max_companies else "999",
-            "--log-level",
-            log_level,
-        ],
-    )
+    # Load companies
+    companies_file = config.seeds_dir / "companies.csv"
+    if not companies_file.exists():
+        console.print(f"[red]Companies file not found: {companies_file}[/red]")
+        raise typer.Exit(1)
+
+    companies = []
+    with open(companies_file, "r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            companies.append(
+                CompanySeed(
+                    company_name=row["company_name"],
+                    careers_url=row.get("careers_url"),
+                    ats_type=row.get("ats_type"),
+                    is_portfolio=row.get("is_portfolio", "false").lower() == "true",
+                    notes=row.get("notes"),
+                )
+            )
+
+    console.print(f"Loaded {len(companies)} companies")
+
+    # Extract
+    stats = extract_jobs(companies, run_date_obj, max_companies=max_companies)
+    console.print(f"Extracted {stats['total_jobs']} jobs from {stats['companies_processed']} companies")
 
     # 3. Build
     console.print("\n[bold cyan]Step 3: Build[/bold cyan]")
-    runner.invoke(
-        build,
-        ["--run-date", run_date_obj.isoformat(), "--log-level", log_level],
-    )
+
+    # Load raw data
+    raw_dir = config.raw_dir / run_date_obj.isoformat()
+    if not raw_dir.exists():
+        console.print(f"[red]No raw data found for {run_date_obj}[/red]")
+        raise typer.Exit(1)
+
+    all_jobs = []
+    all_rejects = []
+
+    # Process each source directory
+    for source_dir in raw_dir.iterdir():
+        if not source_dir.is_dir():
+            continue
+
+        source = source_dir.name
+
+        for company_dir in source_dir.iterdir():
+            if not company_dir.is_dir():
+                continue
+
+            jobs_file = company_dir / "jobs.json"
+            if not jobs_file.exists():
+                continue
+
+            # Load raw jobs
+            import json
+
+            with open(jobs_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+
+            company_name = data["company_name"]
+            raw_jobs = data["jobs"]
+
+            # Transform
+            jobs, rejects = transform_to_canonical(
+                raw_jobs, company_name, source, run_date_obj, strict_us=True
+            )
+
+            all_jobs.extend(jobs)
+            all_rejects.extend(rejects)
+
+    console.print(f"Transformed {len(all_jobs)} valid jobs, {len(all_rejects)} rejected")
+
+    # Enrich
+    console.print("Enriching with role families, skills, and industries...")
+    all_jobs = enrich_role_family(all_jobs)
+    all_jobs = enrich_skills(all_jobs)
+    all_jobs = enrich_industry(all_jobs)
+
+    # Deduplicate
+    all_jobs = deduplicate_jobs(all_jobs)
+
+    # Save
+    if all_jobs:
+        save_to_parquet(all_jobs, run_date_obj)
+        console.print(f"[green]Saved {len(all_jobs)} jobs to parquet[/green]")
+
+    if all_rejects:
+        save_rejects(all_rejects, run_date_obj)
+        console.print(f"[yellow]Saved {len(all_rejects)} rejects[/yellow]")
 
     # 4. Metrics
     console.print("\n[bold cyan]Step 4: Metrics[/bold cyan]")
-    runner.invoke(
-        metrics,
-        ["--run-date", run_date_obj.isoformat(), "--log-level", log_level],
-    )
+    outputs = generate_metrics(run_date_obj)
+    if outputs:
+        console.print(f"[green]Generated {len(outputs)} metric files[/green]")
 
     # 5. Latest
     console.print("\n[bold cyan]Step 5: Latest Snapshot[/bold cyan]")
-    runner.invoke(
-        latest,
-        ["--run-date", run_date_obj.isoformat(), "--log-level", log_level],
-    )
+    output_dir = build_latest_snapshot(run_date_obj)
+    console.print(f"[green]Latest snapshot saved to {output_dir}[/green]")
 
     console.print("\n[bold green]Full pipeline complete![/bold green]")
 
